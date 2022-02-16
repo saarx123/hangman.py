@@ -11,6 +11,7 @@ HANGMAN_ASCII_ART = """Welcome to the game Hangman \n
 MAX_TRIES = 6
 print(HANGMAN_ASCII_ART, MAX_TRIES)
 
+
 letter_guessed = input('guess a letter: ').lower()
 old_letters_guessed = []
 
@@ -38,21 +39,33 @@ def not_vaild(old_letters_guessed):
 
 
 def try_update_letter_guessed(letter_guessed, old_letters_guessed):
-    """function that check if the letter work by the check_vaild_input function. 
+    """function that check if the letter work by the check_vaild_input function.
     and check if the letter show in the old_letter_guessed, if not then add it to the old letter list and return True.
     if the letter show in the old_letter_guessed list then it print the not_vaild function with all the list and return False"""
     if check_valid_input(letter_guessed, old_letters_guessed) == True:
         old_letters_guessed.append(letter_guessed)
-        print(old_letters_guessed)
         return True
     elif check_valid_input(letter_guessed, old_letters_guessed) == False:
-        not_vaild(old_letters_guessed)
+        old_letters_guessed
         return False
 
 
-def main():
-    print(try_update_letter_guessed(letter_guessed, old_letters_guessed))
+def show_hidden_word(secret_word, old_letters_guessed):
+    secret_word_list = []
+    for letter in secret_word:
+        if letter in old_letters_guessed:
+            secret_word_list.append(letter + " ")
+        else:
+            secret_word_list.append(" _")
+    result = ''.join(secret_word_list)
+    return result
 
 
-if __name__ == '__main__':
-    main()
+def check_win(secret_word, old_letters_guessed):
+    if ''.join(show_hidden_word(secret_word, old_letters_guessed).split()) in secret_word:
+        return True
+    else:
+        return False
+
+
+print(check_win('yes', ['y', 's', 'e', 'g']))
