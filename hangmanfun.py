@@ -66,6 +66,3 @@ def check_win(secret_word, old_letters_guessed):
         return True
     else:
         return False
-
-
-print(check_win('yes', ['y', 's', 'e', 'g']))
